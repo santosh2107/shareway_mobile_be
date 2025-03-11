@@ -24,24 +24,26 @@ const Users = sequelize.define(
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false 
-        },
-        address: {
-            type: DataTypes.STRING,
             allowNull: false
         },
-        vehicleType: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        vehiclePlateNumber: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        roleId: {
+        
+        roleType: {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        // address: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
+        // vehicleType: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+        // vehiclePlateNumber: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+
         // otp: {
         //     type: DataTypes.STRING,
         //     allowNull: true,

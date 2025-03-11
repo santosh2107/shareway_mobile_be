@@ -33,10 +33,11 @@ const user_signUp = async (req, res) => {
             mobileNumber: req.body.mobileNumber,
             email: req.body.email,
             password: sPassword,
-            address: req.body.address,
-            vehicleType: req.body.vehicleType,
-            vehiclePlateNumber: req.body.vehiclePlateNumber,
-            roleId: req.body.type,
+            roleType: req.body.roleType,
+            // address: req.body.address,
+            // vehicleType: req.body.vehicleType,
+            // vehiclePlateNumber: req.body.vehiclePlateNumber,
+            
         });
 
         res.status(200).send({ success: true, data: user, message: "Registration successful" });
@@ -97,8 +98,8 @@ const user_login = async (req, res) => {
                     name: userData.name,
                     email: userData.email,
                     mobileNumber: userData.mobileNumber,
-                    address: userData.address,
-                    roleId: userData.type,
+                    // address: userData.address,
+                    roleType: userData.roleType,
                     token: tokenData,
                 };
                 res.status(200).send({ success: true, message: "Login Successfully", data: useResult });

@@ -2,14 +2,18 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../dbConnection/database");
 
 const Ride = sequelize.define(
-    "Ride", // Change "rides" to "Ride" (Singular and PascalCase)
+    "passenger-ride",
     {
-        user_Id: {
+        passengerRide_Id: {
+            type: DataTypes.STRING(20),
+            allowNull: false,
+        },
+        passenger_id: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        ride_Id: {
-            type: DataTypes.STRING(20),
+        passenger_name: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
         pickup_location: {
@@ -28,14 +32,18 @@ const Ride = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         freezeTableName: true,
         hooks: {
             beforeValidate: async (ride, options) => {
-                if (!ride.ride_Id) {
+                if (!ride.passengerRide_Id) {
                     const nanoid = (await import("nanoid")).nanoid;
-                    ride.ride_Id = nanoid(20);
+                    ride.passengerRide_Id = nanoid(20);
                 }
             }
         }

@@ -1,19 +1,20 @@
-const Ride = require('../models/rideModel');
+const PassangerRide = require('../models/passangerRideModel');
 const User = require('../models/userModel');
 
-const add_ride = async (req, res) => {
+const add_passengerRide = async (req, res) => {
     try {
-
         const existUserId = await User.findOne({
-            where: { id: req.body.user_Id },
+            where: { id: req.body.passenger_id },
         });
         if (existUserId) {
-            const ride = await Ride.create({
-                user_Id: req.body.user_Id,
+            const ride = await PassangerRide.create({
+                passenger_id: req.body.passenger_id,
+                passenger_name: existUserId.name,
                 pickup_location: req.body.pickup_location,
                 dropoff_location: req.body.dropoff_location,
                 ride_rent: req.body.ride_rent,
                 booked_time: req.body.booked_time,
+                status: 'pending'
             })
             res.status(200).send({
                 success: true,
@@ -29,9 +30,9 @@ const add_ride = async (req, res) => {
     }
 }
 
-const get_ride = async (req, res) => {
+const get_passengerRide = async (req, res) => {
     try {
-        const rideData = await Ride.findAll();
+        const rideData = await PassangerRide.findAll();
         res.status(200).send({
             success: true,
             message: "All Ride",
@@ -42,15 +43,14 @@ const get_ride = async (req, res) => {
     }
 }
 
-const update_ride = async (req, res) => {
+const update_passengerRide = async (req, res) => {
     try {
-
-        const singleRide = await Ride.findOne({
+        const singleRide = await PassangerRide.findOne({
             where: { ride_Id: req.body.ride_Id },
         });
 
         if (singleRide) {
-            await Ride.update(
+            await PassangerRide.update(
                 {
                     pickup_location: req.body.pickup_location,
                     dropoff_location: req.body.dropoff_location,
@@ -59,7 +59,7 @@ const update_ride = async (req, res) => {
                 },
                 { where: { ride_Id: req.body.ride_Id } }
             );
-            const updatedRide = await Ride.findOne({ where: { ride_Id: req.body.ride_Id }, });
+            const updatedRide = await PassangerRide.findOne({ where: { ride_Id: req.body.ride_Id }, });
             res.status(200).send({
                 success: true,
                 message: "Ride updated successfully",
@@ -78,8 +78,10 @@ const update_ride = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
-    add_ride,
-    get_ride,
-    update_ride
+    add_passengerRide,
+    get_passengerRide,
+    update_passengerRide
 }
